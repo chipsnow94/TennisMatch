@@ -3,7 +3,7 @@ class Tennis
 {
     protected $player1;
     protected $player2;
-    protected $result;
+    private $result;
     protected $lookup=[
         0 => "Love",
         1 => "Fifteen",
@@ -17,73 +17,49 @@ class Tennis
     }
     public function score()
     {
-        if ($this->ValidNumber()) {
-            // Win for
-        }
+        // Win for
         if ($this->hasAWinner()) {
             # code...
-            $result ='Win for '.$this->winner()->name;
+            $result='Win for '. $this->winner()->name;
             return $result;
         }
         if ($this->hasAdvantage()) {
-            $result ='Advantage for '.$this->winner()->name;
+            $result='Advantage for '.$this->winner()->name;
             return $result;
         }
         if ($this->isDeuce()) {
             # code...
-            $result ='Deuce';
+            $result='Deuce';
             return $result;
         }
-        $score = $this->lookup[$this->player1->score]. '-'.$this->lookup[$this->player2->score];
-        return $score;
-
-        // if ($this->player1->score== 1 && $this->player2->score==0) {
-        //     return('Fifteen-Love');
-        // }
-        // if ($this->player1->score== 2 && $this->player2->score==0) {
-        //     return('Thirty-Love');
-       // }
-    }
-    private function ValidNumber()
-    {
-        if (!is_numeric($this->player1->score) || is_numeric($this->player2->score)) {
-            $result= 'Invalid Number';
-            return $result;
-        }
+        return $score = $this->lookup[$this->player1->score]. '-'.$this->lookup[$this->player2->score];
     }
     private function isDeuce()
     {//check Deuce  (Totol scores >6 and players score equal)
-        $result =($this->player1->score + $this->player2->score >=6) && $this->equalScore();
-        return $result;
+        return ($this->player1->score + $this->player2->score >=6) && $this->equalScore();
     }
     private function equalScore()
     {//check players Equalscore
-        $result =$this->player1->score == $this->player2->score;
-        return $result;
+        return $this->player1->score == $this->player2->score;
     }
     private function hasAdvantage()
     {//check Advantage
-        $result =($this->hasEnoughscoretoWin()) && (($this->player1->score - $this->player2->score) ==1 ||($this->player2->score - $this->player1->score)==1);
-        return $result;
+        return ($this->hasEnoughscoretoWin()) && (abs($this->player1->score - $this->player2->score) ==1);
     }
     private function hasAWinner()
     {//check winner
-        $result =($this->hasEnoughscoretoWin()) && ($this->hasmorethan2point());
-        return $result;
+        return ($this->hasEnoughscoretoWin()) && ($this->hasmorethan2point());
     }
     private function winner()
     {//check score winner
-        $result = $this->player1->score > $this->player2->score ? $this->player1 : $this->player2;
-        return $result;
+        return $this->player1->score > $this->player2->score ? $this->player1 : $this->player2;
     }
     private function hasEnoughscoretoWin()
     {//check winner scores to win
-        $result =($this->player1->score - $this->player2->score) >= 4 ||($this->player2->score - $this->player1->score)>=4;
-        return $result;
+        return max([$this->player1->score,$this->player2->score]) >= 4;
     }
     private function hasmorethan2point()
     {//check condition players score need to win than 2 point.
-        $result = ($this->player1->score - $this->player2->score) >= 2 || ($this->player2->score - $this->player1->score) >=2;
-        return $result;
+        return abs($this->player1->score - $this->player2->score) >= 2;
     }
 }

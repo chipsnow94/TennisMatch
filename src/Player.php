@@ -9,13 +9,25 @@ class Player
         $this->name =$name;
         $this->score = $score;
     }
-
-    public function getscore($score)
+    public function getName()
     {
-        // if ($score < 0) {
-        //     # code...
-        //     throw new InvalidArgumentException;
-        // }
+        return $this->name;
+    }
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    public function setScore($score)
+    {
+        if ($score < 0) {
+            # code...
+            throw new InvalidArgumentException('Invalid Number');
+        }
+        if (!is_numeric($score)) {
+            # code...
+            throw new InvalidArgumentException('Invalid Number-Must be a string');
+        }
         $this->score= $score;
     }
 }
