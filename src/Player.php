@@ -4,6 +4,8 @@ class Player
 {
     public $name;
     public $score;
+    const MIN_SCORE=0;
+    const MAX_SCORE=100;
     public function __construct($name, $score)
     {
         $this->name =$name;
@@ -26,7 +28,7 @@ class Player
     }
     private function Check_Exception($score)
     {
-        if ($score < 0 || $score >100) {
+        if ($score < self::MIN_SCORE || $score >self::MAX_SCORE) {
             # code...
             throw new InvalidArgumentException('Invalid Number');
         }

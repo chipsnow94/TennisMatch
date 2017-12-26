@@ -8,16 +8,17 @@ use Player;
 
 class PlayerSpec extends ObjectBehavior
 {
+          $this->name = 'Player1';
+        $this->score = 0;
+
     public function it_is_initializable()
     {
         $this->shouldHaveType('Player');
     }
-    protected $name;
-    protected $score;
+
     public function let()
     {
-        $this->name = 'Player1';
-        $this->score = 0;
+  
         $this->beConstructedWith($this->name, $this->score);
     }
     public function it_invalid_number_exception()
