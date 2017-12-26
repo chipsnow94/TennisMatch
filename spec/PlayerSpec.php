@@ -12,13 +12,13 @@ class PlayerSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Player');
     }
-    protected $Player1;
-    protected $Player2;
+    protected $name;
+    protected $score;
     public function let()
     {
-        $this->Player1= new Player('Player1', 0);
-        $this->Player2 = new Player('Player2', 0);
-        $this->beConstructedWith($this->Player1, $this->Player2);
+        $this->name = 'Player1';
+        $this->score = 0;
+        $this->beConstructedWith($this->name, $this->score);
     }
     public function it_invalid_number_exception()
     {

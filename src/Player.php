@@ -7,6 +7,7 @@ class Player
     public function __construct($name, $score)
     {
         $this->name =$name;
+        $this->Check_Exception();
         $this->score = $score;
     }
     public function getName()
@@ -20,7 +21,12 @@ class Player
 
     public function setScore($score)
     {
-        if ($score < 0) {
+        $this->Check_Exception();
+        $this->score= $score;
+    }
+    private function Check_Exception($score)
+    {
+        if ($score < 0 || $score >100) {
             # code...
             throw new InvalidArgumentException('Invalid Number');
         }
@@ -28,6 +34,5 @@ class Player
             # code...
             throw new InvalidArgumentException('Invalid Number-Must be a string');
         }
-        $this->score= $score;
     }
 }

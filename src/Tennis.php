@@ -4,6 +4,10 @@ class Tennis
     protected $player1;
     protected $player2;
     private $result;
+    const PointToDeuce = 6;
+    const PointToAdvantage = 1;
+    const PointToWin =4;
+    const PointWinCons=2;
     protected $lookup=[
         0 => "Love",
         1 => "Fifteen",
@@ -32,11 +36,12 @@ class Tennis
             $result='Deuce';
             return $result;
         }
-        return $score = $this->lookup[$this->player1->score]. '-'.$this->lookup[$this->player2->score];
+        $score = $this->lookup[$this->player1->score]. '-'.$this->lookup[$this->player2->score];
+        return $score;
     }
     private function isDeuce()
     {//check Deuce  (Totol scores >6 and players score equal)
-        return ($this->player1->score + $this->player2->score >=6) && $this->equalScore();
+        return ($this->player1->score + $this->player2->score >=self::PointToDeuce) && $this->equalScore();
     }
     private function equalScore()
     {//check players Equalscore
@@ -44,7 +49,7 @@ class Tennis
     }
     private function hasAdvantage()
     {//check Advantage
-        return ($this->hasEnoughscoretoWin()) && (abs($this->player1->score - $this->player2->score) ==1);
+        return ($this->hasEnoughscoretoWin()) && (abs($this->player1->score - $this->player2->score) ==self::PointToAdvantage);
     }
     private function hasAWinner()
     {//check winner
@@ -56,10 +61,10 @@ class Tennis
     }
     private function hasEnoughscoretoWin()
     {//check winner scores to win
-        return max([$this->player1->score,$this->player2->score]) >= 4;
+        return max([$this->player1->score,$this->player2->score]) >= self::PointToWin;
     }
     private function hasmorethan2point()
     {//check condition players score need to win than 2 point.
-        return abs($this->player1->score - $this->player2->score) >= 2;
+        return abs($this->player1->score - $this->player2->score) >= self::PointWinCons;
     }
 }
