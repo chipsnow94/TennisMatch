@@ -26,6 +26,6 @@ class PlayerSpec extends ObjectBehavior
     }
     public function it_a_string_score()
     {
-        $this->shouldThrow(new \InvalidArgumentException('Invalid Number-Must be a string'))->duringSetScore('a');
+        $this->shouldThrow(new \InvalidArgumentException('Invalid Input-Must be a number'))->duringSetScore('a');
     }
 }
